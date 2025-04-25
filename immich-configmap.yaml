@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-configmap
+data:
+  # URLS
+  IMMICH_SERVER_URL: http://immich-server.immich.svc.cluster.local:2283
+  IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning.immich.svc.cluster.local:3003
+  # SETTINGS
+  LOG_LEVEL: log
+  UPLOAD_LOCATION: /usr/src/app/upload/data
+  # REDIS
+  REDIS_HOSTNAME: immich-redis.immich.svc.cluster.local
+  REDIS_DBINDEX: "1"
+  REDIS_PORT: "6379"
+  # POSTGRES
+  DB_DATA_LOCATION: /var/lib/postgresql/data/db-files/
+  DB_USERNAME: postgres
+  DB_DATABASE_NAME: immich

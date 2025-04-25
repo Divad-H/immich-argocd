@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich-machine-learning
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: immich-machine-learning
+  template:
+    metadata:
+      labels:
+        app: immich-machine-learning
+    spec:
+      containers:
+        - name: immich-machine-learning
+          image: 'ghcr.io/immich-app/immich-machine-learning:release'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3003
+          envFrom:
+          - secretRef:
+              name: db-password-secret
+          - configMapRef:
+              name: immich-configmap
+          volumeMounts:
+            - mountPath: /cache
+              name: modelcache
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 3003
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 5
+      volumes:
+        - name: modelcache
+          persistentVolumeClaim:
+            claimName: immich-model-cache-volume-claim

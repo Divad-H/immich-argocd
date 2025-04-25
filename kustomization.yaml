@@ -1,0 +1,16 @@
+resources:
+- db-password-secret-sealed.yaml
+- hynix-storage-class.yaml
+- immich-configmap.yaml
+- immich-model-cache-volume-claim.yaml
+- immich-postgres-persistent-volume-claim.yaml
+- immich-volume-claim.yaml
+- redis.service.yaml
+- postgres-service.yaml
+- immich-machine-learning-service.yaml
+- immich-server-service.yaml
+- redis-deployment.yaml
+- postgres-deployment.yaml
+- immich-machine-learning-deployment.yaml
+- immich-server-deployment.yaml
+- immich-ingress-route.yaml
