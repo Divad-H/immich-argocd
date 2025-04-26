@@ -15,6 +15,7 @@ data:
   REDIS_DBINDEX: "1"
   REDIS_PORT: "6379"
   # POSTGRES
-  DB_DATA_LOCATION: /var/lib/postgresql/data/db-files/
   DB_USERNAME: postgres
+  PGUSER: postgres
   DB_DATABASE_NAME: immich
+  PGDATABASE: immich

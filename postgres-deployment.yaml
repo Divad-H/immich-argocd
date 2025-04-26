@@ -21,6 +21,8 @@ spec:
           env:
             - name: POSTGRES_INITDB_ARGS
               value: --data-checksums
+            - name: PGDATA
+              value: /var/lib/postgresql/data/db-files/
           envFrom:
           - secretRef:
               name: db-password-secret
