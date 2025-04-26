@@ -14,3 +14,4 @@ resources:
 - immich-machine-learning-deployment.yaml
 - immich-server-deployment.yaml
 - immich-ingress-route.yaml
+- local-immich-ingress-route.yaml
