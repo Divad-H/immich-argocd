@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: immich-server
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: immich-server
@@ -12,6 +12,8 @@ spec:
       labels:
         app: immich-server
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: slave-pi-1
       initContainers:
         - name: init-immich-server
           image: postgres
