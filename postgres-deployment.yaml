@@ -12,6 +12,8 @@ spec:
       labels:
         app: immich-postgres
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: slave-pi-1
       containers:
         - name: immich-postgres
           image: 'docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52'
