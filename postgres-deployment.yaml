@@ -16,7 +16,7 @@ spec:
         kubernetes.io/hostname: slave-pi-1
       containers:
         - name: immich-postgres
-          image: 'docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52'
+          image: 'ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0'
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5432
@@ -33,43 +33,6 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgresdata
-          command: 
-            - docker-entrypoint.sh
-            - -c
-            - shared_preload_libraries=vectors.so
-            - -c
-            - 'search_path="$$user", public, vectors'
-            - -c
-            - logging_collector=on
-            - -c
-            - max_wal_size=2GB
-            - -c
-            - shared_buffers=512MB
-            - -c
-            - wal_compression=on
-          livenessProbe:
-            exec:
-              command:
-              - /bin/sh
-              - -c
-              - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
-            failureThreshold: 6
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 5
-          readinessProbe:
-            exec:
-              command:
-              - /bin/sh
-              - -c
-              - -e
-              - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
-            failureThreshold: 6
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 5
       volumes:
         - name: postgresdata
           persistentVolumeClaim:
